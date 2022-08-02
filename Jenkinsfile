@@ -91,11 +91,11 @@ void MessageMattermost(Boolean onlyOnMaster, String color, String message) {
 // TODO: Move all appropriate/applicable work to Cake
 pipeline {
   agent none // this is to ensure the timeout option applies regardless of agent availability
-  options {
-    timestamps()
-    lock('CCOM/hxc-verifier-perf') // we only have one set of dedicated VMs!
-    checkoutToSubdirectory 'src'
-    timeout time: 10, unit: 'HOURS'
+  //options {
+    //timestamps()
+    //lock('CCOM/hxc-verifier-perf') // we only have one set of dedicated VMs!
+    //checkoutToSubdirectory 'src'
+    //timeout time: 10, unit: 'HOURS'
   }
   triggers {
     // Run master at 12:00 UTC on Everyday
