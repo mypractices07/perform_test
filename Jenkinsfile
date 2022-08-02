@@ -122,3 +122,210 @@ pipeline {
           yamlFile './build-spec.yml'
           defaultContainer 'ngweb-node'
         }
+      }
+      steps {
+        script {
+		  CLIENT_ID='test-client'
+	      CLIENT_SECRET='secret-123'
+           if (params.Environment == 'AWS dev') {
+             HXC_URL = 'https://faculty-ad6a0b45-7fba-4466-ba64-11e6e4082c9d.hxc.dev.hxp.hyland.com'
+             IDP_URL = 'https://auth.iam.dev.hxp.hyland.com/idp'
+             PLATFORM_API = 'https://platform.hxc.dev.hxp.hyland.com'
+            // VERIFIER_USERS = "{\"dataCreationUser\":{\"username\":\"bob\",\"fullname\":\"Bob Smith\",\"useremail\":\"Bob.Smith@email.com\",\"password\":\"wstinol2019\",\"scope\":\"hxp\",\"tenantKey\":\"faculty-ad6a0b45-7fba-4466-ba64-11e6e4082c9d\"},\"user0\":{\"fullname\":\"Avis Amey\",\"useremail\":\"aamey@email.com\",\"password\":\"wstinol2019\"},\"user1\":{\"fullname\":\"Bob Smith\",\"useremail\":\"Bob.Smith@email.com\",\"password\":\"wstinol2019\",\"tenantKey\":\"students-a5c54760-4243-4b44-91ea-1ccb31637d5b\"},\"user2\":{\"fullname\":\"Bob Smith\",\"useremail\":\"bob.smith@email.com\",\"password\":\"badpassword\"}}"
+            // CONFIGURL = "https://__tenant__.hxc-config.dev.hxp.hyland.com"
+            VERIFIER_USERS = "{\"dataCreationUser\":{\"username\":\"bob\",\"fullname\":\"Bob Smith\",\"useremail\":\"Bob.Smith@email.com\",\"password\":\"wstinol2019\",\"scope\":\"hxp\",\"tenantKey\":\"faculty-ad6a0b45-7fba-4466-ba64-11e6e4082c9d\"},\"user0\":{\"fullname\":\"Avis Amey\",\"useremail\":\"aamey@email.com\",\"password\":\"wstinol2019\"},\"user1\":{\"fullname\":\"Bob Smith\",\"useremail\":\"Bob.Smith@email.com\",\"password\":\"wstinol2019\",\"tenantKey\":\"students-a5c54760-4243-4b44-91ea-1ccb31637d5b\"},\"user2\":{\"fullname\":\"Bob Smith\",\"useremail\":\"bob.smith@email.com\",\"password\":\"badpassword\"}}"
+            CONFIGURL = "https://__tenant__.hxc-config.dev.hxp.hyland.com"
+          } else if (params.Environment == 'AWS staging') {
+            HXC_URL = 'https://faculty-ad6a0b45-7fba-4466-ba64-11e6e4082c9d.hxc.staging.hxp.hyland.com'
+             IDP_URL = 'https://auth.iam.staging.hxp.hyland.com/idp'
+             PLATFORM_API = 'https://platform.hxc.staging.hxp.hyland.com'
+             VERIFIER_USERS = "{\"dataCreationUser\":{\"username\":\"bob\",\"fullname\":\"Bob Smith\",\"useremail\":\"Bob.Smith@email.com\",\"password\":\"wstinol2019\",\"scope\":\"hxp\",\"tenantKey\":\"faculty-ad6a0b45-7fba-4466-ba64-11e6e4082c9d\"},\"user0\":{\"fullname\":\"Avis Amey\",\"useremail\":\"aamey@email.com\",\"password\":\"wstinol2019\"},\"user1\":{\"fullname\":\"Bob Smith\",\"useremail\":\"Bob.Smith@email.com\",\"password\":\"wstinol2019\",\"tenantKey\":\"students-a5c54760-4243-4b44-91ea-1ccb31637d5b\"},\"user2\":{\"fullname\":\"Bob Smith\",\"useremail\":\"bob.smith@email.com\",\"password\":\"badpassword\"}}"
+             CONFIGURL = "https://__tenant__.hxc-config.staging.hxp.hyland.com"
+          } else if (params.Environment == 'AWS sandbox') {
+            HXC_URL = 'https://faculty-ad6a0b45-7fba-4466-ba64-11e6e4082c9d.hxc.sandbox.hxp.hyland.com'
+             IDP_URL = 'https://auth.iam.dev.hxp.hyland.com/idp'
+             PLATFORM_API = 'https://platform.hxc.sandbox.hxp.hyland.com'
+            // VERIFIER_USERS = "{\"dataCreationUser\":{\"username\":\"bob\",\"fullname\":\"Bob Smith\",\"useremail\":\"Bob.Smith@email.com\",\"password\":\"wstinol2019\",\"scope\":\"hxp\",\"tenantKey\":\"faculty-ad6a0b45-7fba-4466-ba64-11e6e4082c9d\"},\"user0\":{\"fullname\":\"Avis Amey\",\"useremail\":\"aamey@email.com\",\"password\":\"wstinol2019\"},\"user1\":{\"fullname\":\"Bob Smith\",\"useremail\":\"Bob.Smith@email.com\",\"password\":\"wstinol2019\",\"tenantKey\":\"students-a5c54760-4243-4b44-91ea-1ccb31637d5b\"},\"user2\":{\"fullname\":\"Bob Smith\",\"useremail\":\"bob.smith@email.com\",\"password\":\"badpassword\"}}"
+            // CONFIGURL = "https://__tenant__.hxc-config.dev.hxp.hyland.com"
+            VERIFIER_USERS = "{\"dataCreationUser\":{\"username\":\"bob\",\"fullname\":\"Bob Smith\",\"useremail\":\"Bob.Smith@email.com\",\"password\":\"wstinol2019\",\"scope\":\"hxp\",\"tenantKey\":\"faculty-ad6a0b45-7fba-4466-ba64-11e6e4082c9d\"},\"user0\":{\"fullname\":\"Avis Amey\",\"useremail\":\"aamey@email.com\",\"password\":\"wstinol2019\"},\"user1\":{\"fullname\":\"Bob Smith\",\"useremail\":\"Bob.Smith@email.com\",\"password\":\"wstinol2019\",\"tenantKey\":\"students-a5c54760-4243-4b44-91ea-1ccb31637d5b\"},\"user2\":{\"fullname\":\"Bob Smith\",\"useremail\":\"bob.smith@email.com\",\"password\":\"badpassword\"}}"
+            CONFIGURL = "https://__tenant__.hxc-config.dev.hxp.hyland.com"
+          }
+          IDP_EMAIL = 'bob.smith@email.com'
+        }
+      }
+    }
+    stage('Confirm agent availability') {
+      steps {
+        timeout(time: 10, unit: 'MINUTES') {
+          node(label: WindowsAgentLabel) {
+            echo 'Available!'
+          }
+        }
+      }
+      post {
+        aborted {
+          MessageMattermost(SEND_FOR_ALL_BRANCHES, MATTERMOST_RED, '@all The performance pipeline **did not run** because the Windows Desktop VM was unavailable.')
+          error 'Timed-out (or was manually aborted) while waiting for Windows agent to become available!'
+        }
+      }
+    }
+    stage('Prepare, Bench, and Publish') {
+      agent {
+        label WindowsAgentLabel
+      }
+      environment {
+        Webdrivers = "C:\\Users\\cua\\AppData\\Roaming\\npm\\node_modules\\webdriver-manager\\selenium" // NOTE: this path MUST be absolute
+      }
+      stages {
+        stage('Prepare Dependencies') {
+          parallel {
+            ////////////////////////////////////////
+            // the next two stages download and prepare necessary software on the Windows Desktop VM
+            stage('A. Chrome Webdriver') {
+              steps {
+                powershell 'src/Jenkins/Install-ChromeWebdriver.ps1 -Destination $env:Webdrivers -ErrorAction Stop; exit $LASTEXITCODE'
+              }
+            }
+          }
+        }
+        stage('Bench') {
+          failFast true
+          parallel {
+            // NOTE: The following stages' names have been given prefixes so as to control the order in which they are listed by Jenkins Blue Ocean.
+
+            stage('A. JMeter') {
+              environment {
+                IDP_BASE = "${IDP_URL}"
+                JMETER_HOME = 'C:\\opt\\apache-jmeter-5.3' // JMeter must ALREADY be installed--with the appropriate plugins--at this location on the Windows VM
+                PLATFORM_API = "${PLATFORM_API}"
+              }
+              steps {
+                powershell label: 'Create Setup and copy dependencies', script: '''
+                   pushd .\\src\\
+                   ./gradlew BuildAndCopyLibs
+                   ./gradlew CopyDependencies
+                   popd
+                  '''
+                powershell label: 'Clean workspace', script: 'Get-ChildItem -File | Remove-Item -Force -Verbose' // just in case jmeter artifacts are leftover from a previous run (shouldn't happen)
+
+               // now for the actual testing...
+                //withCredentials([usernamePassword(credentialsId: '171941e1-d525-4daa-990e-e0d947dc60d4', usernameVariable: 'IDP_USER', passwordVariable: 'IDP_PASSWD')]) {
+                  // NOTE: credential changes should be performed by updating '093be8ad-801f-4cc1-92e8-05e10502e829' in the Jenkins web interface, not by code
+
+                withEnv(["PATH+=$JMETER_HOME/bin", 'CHROME_HEADLESS_MODE=true', "APP_URL=$HXC_URL", "CHROME_DRIVER_PATH=${readJSON(file: "$Webdrivers\\update-config.json").chrome.last}","DATA_CREATION_USERNAME=bob","DATA_CREATION_USERPWD=wstinol2019","DATA_CREATION_USERSCOPE=hxp","TENANT_ID=faculty-ad6a0b45-7fba-4466-ba64-11e6e4082c9d"]) {
+                  echo "Using Chrome Webdriver: $CHROME_DRIVER_PATH"
+                  echo "Using Jmeter Home: $JMETER_HOME"
+                  powershell label: 'java version', script: 'Get-Command java | Select-Object Version'
+                  script {
+                    powershell label: 'Install npm package dependency', script: '''
+                                          pushd src
+                                          npm ci
+                                          '''
+
+                  }
+
+                  script {
+                     timeout(1000) {
+                         powershell label: 'Run test case: common-user-actions-single-user-50docs-10pgs', script: '''
+                         pushd src
+                         npm test suiteName=common-user-actions-single-user-50docs-10pgs testName=common-user-actions numberOfUsers=1 rampup=10
+                         popd
+                         '''
+                     }
+                    // timeout(100) {
+                    //     powershell label: 'Run test case: common-user-actions-multi-user-50docs-10pgs', script: '''
+                    //     pushd src
+                    //     npm test suiteName=common-user-actions-multi-user-50docs-10pgs testName=common-user-actions numberOfUsers=10 rampup=30
+                    //     popd
+                    //     '''
+                    // }
+                    // timeout(100) {
+                    //     powershell label: 'Run test case: last-page-navigation-10000batch', script: '''
+                    //     pushd src
+                    //     npm test suiteName=last-page-navigation-10000batch testName=last-page-navigation numberOfUsers=1 rampup=10
+                    //     popd
+                    //     '''
+                    //  }
+                    timeout(100) {
+                        powershell label: 'Run test case: content-queue-navigation', script: '''
+                        pushd src
+                        npm test suiteName=content-queue-navigation testName=content-queue-navigation numberOfUsers=1 rampup=10
+                        popd
+                        '''
+                    }
+                    powershell label: 'Copy dependencies', script: "Copy-Item -Path src\\*.jtl -force"
+                  }
+                }
+                }
+              post {
+                always {
+                  script {
+                    def timeLimits = readYaml(file: 'src/baseline/config.yml').tests
+                .findAll({ n, d -> d && d.threshold })
+                .collect({ n, d -> "${n}.jtl:${d.threshold * d.Withbuffer as int}"  } )
+                .join('\n')
+                    echo "Enforced Time Limits (ms)\n---\n$timeLimits" // log our timing thresholds
+                    //Archive artifacts
+                    archiveArtifacts artifacts: '/src/*.log' // JMeter log file(s); for debugging purposes
+                    archiveArtifacts artifacts: '/src/*.jtl', allowEmptyArchive: true // the actual performance data
+                    // Archive error screenshots
+                    archiveArtifacts artifacts: '/src/screenshots/*.*', allowEmptyArchive: true
+
+                    //display report
+                    perfReport \
+                  sourceDataFiles: '*.jtl',
+                  compareBuildPrevious: true,
+                  errorFailedThreshold: 1,
+                  errorUnstableResponseTimeThreshold: timeLimits
+                    
+                // It *is* possible for `perfReport` to throw, in which case we want this to remain false.
+              	// That's also the primary motivation behind making it part of the global state rather than a parameter for `MessageMattermost()`.
+              		State.haveReport = true
+
+                    // send status notification via Mattermost
+                    def status = [
+                      SUCCESS:  [color: MATTERMOST_GREEN,  message: '**Rejoice!** Performance was satisfactory.' ],
+                      UNSTABLE: [color: MATTERMOST_YELLOW, message: '@all Performance was **unsatisfactory**.'   ],
+                      FAILURE:  [color: MATTERMOST_RED,    message: '@all One or more performance tests **failed with errors**.'],
+                    ][currentBuild.result]
+                    MessageMattermost(SEND_FOR_MASTER_ONLY, status.color, status.message)
+                  }
+                }
+                aborted {
+                  MessageMattermost(SEND_FOR_MASTER_ONLY, MATTERMOST_YELLOW, '@all Performance tests **did not finish** due to 10 hour timeout (or manual abort)!')
+                }
+                // success {
+                //   node(label: MongoDBAgentLabel) {
+                //     // the various services we started earlier will also be used for manual performance testing
+                //     // to give testers a clean platform, we need to clear out mongo; everything else can keep running
+                //     StartPlatformService('mongoserver', '--renew-anon-volumes', 'mongod --version', false)
+                //     cleanWs()
+                //   }
+                // }
+                failure {
+                  script {                    
+                      MessageMattermost(SEND_FOR_MASTER_ONLY, MATTERMOST_RED, '@all Performance tests **did not run** successfully!')                   
+                  }
+                }
+              }
+              }
+            }
+          }
+        }
+      post {
+        cleanup {
+          cleanWs()
+        }
+      }
+      }
+    }
+  post {
+    unsuccessful {
+      script {
+        if (currentBuild.result != ABORTED && !State.notified) {
+          MessageMattermost(SEND_FOR_MASTER_ONLY, MATTERMOST_RED, '@all The performance pipeline is **broken**!')
+        }
+      }
+    }
+  }
+  }
