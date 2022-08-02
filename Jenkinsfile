@@ -112,3 +112,13 @@ pipeline {
 
  
   }
+
+  stages {
+
+    stage('Initialize Global Variables') {
+      agent {
+        kubernetes {
+          label "hxc-perf-${UUID.randomUUID().toString()}"
+          yamlFile './build-spec.yml'
+          defaultContainer 'ngweb-node'
+        }
