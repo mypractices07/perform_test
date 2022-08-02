@@ -85,3 +85,30 @@ void MessageMattermost(Boolean onlyOnMaster, String color, String message) {
   endpoint: MattermostEndpoint
 }
 
+// Pipeline
+////////////////////////////////////////
+
+// TODO: Move all appropriate/applicable work to Cake
+pipeline {
+  agent none // this is to ensure the timeout option applies regardless of agent availability
+  //options {
+    //timestamps()
+    //lock('CCOM/hxc-verifier-perf') // we only have one set of dedicated VMs!
+    //checkoutToSubdirectory 'src'
+    //timeout time: 10, unit: 'HOURS'
+  }
+  triggers {
+    // Run master at 12:00 UTC on Everyday
+    // See https://jenkins.io/doc/book/pipeline/syntax/#cron-syntax and/or https://crontab.guru/ <-- FAR MORE HELPFUL!!
+    cron(BRANCH_NAME in ['master' ,'develop']  ? '00 12 * * 1-7' : '')    
+  }
+  parameters {
+      choice name: 'Environment', choices: [ 'AWS sandbox','AWS dev', 'AWS staging'],
+      description: 'Environment to use. If you choose one of the AWS options, please leave the other parameters as their default values (DebugE2E still available)'
+  }
+  environment {
+ 
+    CORS_ORIGIN = '*'
+
+ 
+  }
