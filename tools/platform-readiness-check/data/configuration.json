@@ -1,0 +1,32 @@
+{
+    "processFlowConfigs": [
+        {
+            "name": "readiness-processflow",
+            "revisionId": "Rev1",
+            "actions": [
+                {
+                    "name": "Verification-Action",
+                    "type": "Verification"
+                }
+            ]
+        }
+    ],
+    "contentQueueConfigs": [
+        {
+            "referenceNumber": 1,
+            "name": "readiness-content-queue",
+            "activeProcessFlowName": "readiness-processflow",
+            "documentClassDefs": [
+                {
+                    "name": "Class 1",
+                    "fieldDefs": [
+                        {
+                            "name": "Field 1",
+                            "dataType": "Alphanumeric"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

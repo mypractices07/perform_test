@@ -1,0 +1,46 @@
+# This file is used by the Jenkins pipeline.
+# It maps the name of each performance suite to a time limit in milli-seconds w/ upto three decimals of precision.
+# If any sample exceeds its time limit, then the owning test's performance will be considered unsatisfactory.
+#
+# While not required, whenever a new suite is added to the repo, it should also be added here.
+# NOTE: Buffer of 10 % to the actual baseline.hence Baseline value becomes = 1 + 0.1 = 1.1
+#
+# NOTE: Thresholds are applied to each individual sample within a test rather than the test as a whole (blame Jenkins).
+
+#        single /multiple user test steps
+#-------------------------------------------------------
+# Opening a Batch and wait for Batchlist to render.(note the time)
+# Opening a Batch and waiting for visible documents and pages to load.(note the time)
+# Click on ClassList and Dropdown to Render the classlist.(note the time)
+# Classify a document and wait for fields to appear.(note the time)
+# Navigate to a non-rendered Document and wait for document to render.(note the time)
+# Navigate to a non-rendered Page and wait for Page to render.(note the time)
+#
+#       content-queue-navigation test steps
+#------------------------------------------------
+# Login and click on a content-queue wait for the batchlist to render.(note the time)
+#
+#  
+#              last-page-navigation
+#---------------------------------------------
+# Login and open a 10000 batch nd navigate to the last batchlist page.(note the time)
+#
+#
+#
+---
+
+tests:
+  
+  common-user-actions-single-user-50docs-10pgs:
+    threshold: 2500
+    Withbuffer: 1.1
+  common-user-actions-multi-user-50docs-10pgs:
+    threshold: 4000
+    Withbuffer: 1.1
+  content-queue-navigation:
+    threshold: 600
+    Withbuffer: 1.1
+  last-page-navigation-10000batch:
+    threshold: 600
+    Withbuffer: 1.1
+  

@@ -1,0 +1,40 @@
+{
+  "name": "hxc-verifier-perf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "platform-readiness-check": "node -r ts-node/register -r tsconfig-paths/register tools/platform-readiness-check",
+    "test": "node -r ts-node/register -r tsconfig-paths/register runner/main",
+    "removeQueue": "node -r ts-node/register -r tsconfig-paths/register tools/queue-removal"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@bitbucket.hylandqa.net:7999/cua/hxc-verifier-perf.git"
+  },
+  "author": "CUA",
+  "license": "ISC",
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@cua/test-kit": "^1.0.0-beta.8",
+    "@hyland/standards": "^2.0.0",
+    "@types/node": "^13.7.1",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.1.1",
+    "prettier": "^2.0.2",
+    "ts-node": "^8.10.2",
+    "tsconfig-paths": "^3.9.0",
+    "tslint": "^6.0.0",
+    "typescript": "^3.7.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.ts": "tslint"
+  }
+}

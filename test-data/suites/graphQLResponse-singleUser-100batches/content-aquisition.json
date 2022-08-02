@@ -1,0 +1,39 @@
+{
+    "batchReadyPolling": {
+        "interval": 10000,
+        "timeout": 60000
+    },
+    "batches": [
+        {
+            "copies": 1,
+            "template": {
+                "name": "Batch_${batchCopyNumber}",
+                "contentQueueName": "graphQL-response-single-user-100batches-content-queue",
+                "skipProcessing": false,
+                "readyState": "Created",
+                "documents": [
+                    {
+                        "copies": 1,
+                        "template": {
+                            "name": "Document_${docCopyNumber}",
+                            "pages": [
+                                {
+                                    "copies": 2,
+                                    "template": {
+                                        "filePath": "${dir.thisDir}/../../images/Run_1_1099.png"
+                                    }
+                                },
+                                {
+                                    "copies": 2,
+                                    "template": {
+                                        "filePath": "${dir.thisDir}/../../images/Run_1_InsuranceCard.png"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

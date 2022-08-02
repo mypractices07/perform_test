@@ -1,0 +1,167 @@
+{
+    "processFlowConfigs": [
+        {
+            "name": "Performance-Testing-ProcessFlow",
+            "revisionId": "Rev1",
+            "actions": [                               
+                {
+                    "name": "Verification-Action",
+                    "type": "Verification"
+                },
+                {
+                    "name": "Export-Action",
+                    "type": "Export"
+                }
+            ]
+        }
+    ],
+    "contentQueueConfigs": [
+        {
+            "referenceNumber": 1,
+            "name": "Performance-Testing-Default-ContentQueue",
+            "activeProcessFlowName": "Performance-Testing-ProcessFlow",
+            "documentClassDefs": [
+                {
+                    "name": "1099 Form",
+                    "fieldDefs": [
+                        {
+                            "name": "Payer's TIN",
+                            "dataType": "Alphanumeric"
+                        },
+                        {
+                            "name": "Recipient's TIN",
+                            "dataType": "Alphanumeric"
+                        },
+                        {
+                            "name": "Recipient's Name",
+                            "dataType": "Phrase"
+                        },
+                        {
+                            "name": "Nonemployee Compensation",
+                            "dataType": "CurrencyAmount"
+                        }
+                    ]
+                },
+                {
+                    "name": "W2 Form",
+                    "fieldDefs": [
+                        {
+                            "name": "Employee's SSN",
+                            "dataType": "Alphanumeric"
+                        },
+                        {
+                            "name": "EIN",
+                            "dataType": "Alphanumeric"
+                        },
+                        {
+                            "name": "Wages & Tips",
+                            "dataType": "CurrencyAmount"
+                        },
+                        {
+                            "name": "Federal income tax withheld",
+                            "dataType": "CurrencyAmount"
+                        },
+                        {
+                            "name": "Social security wages",
+                            "dataType": "CurrencyAmount"
+                        },
+                        {
+                            "name": "Social security tax withheld",
+                            "dataType": "CurrencyAmount"
+                        },
+                        {
+                            "name": "Medicare wages",
+                            "dataType": "CurrencyAmount"
+                        },
+                        {
+                            "name": "Medicare tax withheld",
+                            "dataType": "CurrencyAmount"
+                        }
+                    ]
+                },
+                {
+                    "name": "Insurance Card",
+                    "fieldDefs": [
+                        {
+                            "name": "Member Name",
+                            "dataType": "Phrase"
+                        },
+                        {
+                            "name": "Member ID",
+                            "dataType": "Alphanumeric"
+                        },
+                        {
+                            "name": "Effective Date",
+                            "dataType": "DateTime"
+                        },
+                        {
+                            "name": "Group",
+                            "dataType": "Alphanumeric"
+                        },
+                        {
+                            "name": "RxBin",
+                            "dataType": "Alphanumeric"
+                        },
+                        {
+                            "name": "RxPCN",
+                            "dataType": "Alphanumeric"
+                        },
+                        {
+                            "name": "Rx Group",
+                            "dataType": "Alphanumeric"
+                        }
+                    ]
+                },
+                {
+                    "name": "I9 Form",
+                    "fieldDefs": [
+                        {
+                            "name": "Last Name",
+                            "dataType": "Alphanumeric"
+                        },
+                        {
+                            "name": "First Name",
+                            "dataType": "Alphanumeric"
+                        },
+                        {
+                            "name": "Address",
+                            "dataType": "Phrase"
+                        },
+                        {
+                            "name": "Zip",
+                            "dataType": "Alphanumeric"
+                        },
+                        {
+                            "name": "Date of Birth",
+                            "dataType": "DateTime"
+                        },
+                        {
+                            "name": "Social Security Number",
+                            "dataType": "Alphanumeric"
+                        },
+                        {
+                            "name": "Email Address",
+                            "dataType": "Alphanumeric"
+                        },
+                        {
+                            "name": "Document Title 1",
+                            "dataType": "Phrase"
+                        },
+                        {
+                            "name": "Issuing Authority 1",
+                            "dataType": "Phrase"
+                        },
+                        {
+                            "name": "Document Number 1",
+                            "dataType": "Numeric"
+                        },
+                        {
+                            "name": "Expiration Date 1",
+                            "dataType": "DateTime"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

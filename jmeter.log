@@ -1,0 +1,16 @@
+2022-07-28 11:22:09,344 WARN o.a.j.u.JMeterUtils: Exception 'Cannot invoke "java.util.Properties.getProperty(String, String)" because "org.apache.jmeter.util.JMeterUtils.appProperties" is null' occurred when fetching String property:'sampleresult.default.encoding', defaulting to: ISO-8859-1
+2022-07-28 11:22:09,357 WARN o.a.j.u.JMeterUtils: Exception 'Cannot invoke "java.util.Properties.getProperty(String)" because "org.apache.jmeter.util.JMeterUtils.appProperties" is null' occurred when fetching String property:'jmeterPlugin.prefixPlugins'
+2022-07-28 11:22:09,358 INFO k.a.j.PluginsCMDWorker: Using JMeterPluginsCMD v. N/A
+2022-07-28 11:22:09,361 INFO o.a.j.u.JMeterUtils: Setting Locale to en_US
+2022-07-28 11:22:09,389 INFO k.a.j.JMeterPluginsUtils: Loading user properties from: C:\DevrajGL\PerformanceTesting\apache-jmeter-5.5\bin\user.properties
+2022-07-28 11:22:09,397 INFO k.a.j.JMeterPluginsUtils: Loading system properties from: C:\DevrajGL\PerformanceTesting\apache-jmeter-5.5\bin\system.properties
+2022-07-28 11:22:10,486 INFO o.a.j.s.SaveService: Testplan (JMX) version: 2.2. Testlog (JTL) version: 2.2
+2022-07-28 11:22:10,524 INFO o.a.j.s.SaveService: Using SaveService properties version 5.0
+2022-07-28 11:22:10,530 INFO o.a.j.s.SaveService: Using SaveService properties file encoding UTF-8
+2022-07-28 11:22:10,561 INFO o.a.j.s.SampleResult: Note: Sample TimeStamps are START times
+2022-07-28 11:22:10,562 INFO o.a.j.s.SampleResult: sampleresult.default.encoding is set to ISO-8859-1
+2022-07-28 11:22:10,562 INFO o.a.j.s.SampleResult: sampleresult.useNanoTime=true
+2022-07-28 11:22:10,563 INFO o.a.j.s.SampleResult: sampleresult.nanoThreadSleep=5000
+2022-07-28 11:22:10,575 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2022-07-28 11:22:10,604 INFO k.a.j.v.MergeResultsGui: Saving CSV to C:\Repo\HxC-Verifier-Perf-BatchLoading\mergedReport-graphQLResponse-singleUser-50batches.csv
+2022-07-28 11:22:10,616 INFO o.a.j.s.FileServer: Default base='C:\Repo\HxC-Verifier-Perf-BatchLoading'

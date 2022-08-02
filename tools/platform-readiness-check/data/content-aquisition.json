@@ -1,0 +1,20 @@
+{
+    "batches": [
+        {
+            "name": "Batch_0001",
+            "contentQueueName": "readiness-content-queue",
+            "skipProcessing": true,
+            "readyState": "Created",
+            "documents": [
+                {
+                    "name": "Document_1",
+                    "pages": [
+                        {
+                            "filePath": "${dir.thisDir}/Run_1_1099.png"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,91 @@
+{
+    "processFlowConfigs": [
+        {
+            "name": "graphQL-response-single-user-100batches-processflow",
+            "revisionId": "Rev1",
+            "actions": [
+                {
+                    "name": "Verification-Action",
+                    "type": "Verification"
+                }
+            ]
+        }
+    ],
+    "contentQueueConfigs": [
+        {
+            "referenceNumber": 1,
+            "name": "graphQL-response-single-user-100batches-content-queue",
+            "activeProcessFlowName": "graphQL-response-single-user-100batches-processflow",
+            "documentClassDefs": [
+                {
+                    "copies": 1,
+                    "template": {
+                        "name": "Document Class ${index}",
+                        "fieldDefs": [
+                            {
+                                "name": "Field 1",
+                                "dataType": "Alphanumeric"
+                            },
+                            {
+                                "name": "Field 2",
+                                "dataType": "Alphanumeric"
+                            },
+                            {
+                                "name": "Field 3",
+                                "dataType": "Alphanumeric"
+                            },
+                            {
+                                "name": "Field 4",
+                                "dataType": "Alphanumeric"
+                            },
+                            {
+                                "name": "Field 5",
+                                "dataType": "Alphanumeric"
+                            },
+                            {
+                                "name": "Field 6",
+                                "dataType": "Alphanumeric"
+                            },
+                            {
+                                "name": "Field 7",
+                                "dataType": "Alphanumeric"
+                            },
+                            {
+                                "name": "Field 8",
+                                "dataType": "Alphanumeric"
+                            },
+                            {
+                                "name": "Field 9",
+                                "dataType": "Alphanumeric"
+                            },
+                            {
+                                "name": "Field 10",
+                                "dataType": "Alphanumeric"
+                            },
+                            {
+                                "name": "Field 11",
+                                "dataType": "Alphanumeric"
+                            },
+                            {
+                                "name": "Field 12",
+                                "dataType": "Alphanumeric"
+                            },
+                            {
+                                "name": "Field 13",
+                                "dataType": "Alphanumeric"
+                            },
+                            {
+                                "name": "Field 14",
+                                "dataType": "Alphanumeric"
+                            },
+                            {
+                                "name": "Field 15",
+                                "dataType": "Alphanumeric"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}
